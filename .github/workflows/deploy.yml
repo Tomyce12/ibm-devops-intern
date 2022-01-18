@@ -39,3 +39,4 @@ jobs:
           script: |
             cd /home/ubuntu/www
             node app.js
+# sdasd

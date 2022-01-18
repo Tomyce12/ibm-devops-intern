@@ -1,4 +1,4 @@
-name: Push-to-EC2
+ name: Push-to-EC2
 
 on: push
 
@@ -11,15 +11,15 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v1
       
-      - name: Create deploy dir if not exist
-        uses: fifsky/ssh-action@master
+      - name: multiple command
+        uses: appleboy/ssh-action@master
         with:
-          command: |
-            mkdir -p /home/ubuntu/www
-            ls -a
           host: ${{ secrets.HOST }}
-          user: "ubuntu"
-          key: ${{ secrets.EC2_SSH_KEY}}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
+          script: |
+            mkdir -p /home/ubuntu/www
 
       - name: Deploy to my EC2 instance
         uses: easingthemes/ssh-deploy@v2.1.5
@@ -30,12 +30,13 @@ jobs:
           REMOTE_USER: "ubuntu"
           TARGET: "/home/ubuntu/www"
 
-      - name: Run 
-        uses: fifsky/ssh-action@master
+      - name: multiple command
+        uses: appleboy/ssh-action@master
         with:
-          command: |
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
+          script: |
             cd /home/ubuntu/www
             node app.js
-          host: ${{ secrets.HOST }}
-          user: root
-          key: ${{ secrets.EC2_SSH_KEY}}

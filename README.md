@@ -24,3 +24,6 @@ Make sure that subnet has appropriate inbound rules for SSH.
 ## Playbook 
 The playbook creates a EC2 instance and installes redis on it. 
 The second part is dependant on the EC2 creation as it returns the IP address of newly created VM for redis installation (2nd part)
+
+##
+.env is ignored on educational purposes

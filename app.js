@@ -1,14 +1,15 @@
 import express from 'express';
 import expressSession from "express-session"
 import expressVisitorCounter from 'express-visitor-counter';
-import redis from "redis"
+import {createClient} from "redis"
+import 'dotenv/config'
 
 const app = express();
 
-const port = 8080;
-
 const counters = {};
-const redisClient = redis.createClient({ database: 1 });
+const redisClient = createClient({
+  url: `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`
+});
 
 (async () => {
     await redisClient.connect();
@@ -19,7 +20,7 @@ const redisClient = redis.createClient({ database: 1 });
   app.get('/', (req, res, next) => {
     res.json(counters);
   });
-  app.listen(port, ()=>{
-      console.log(`Running on http://localhost:${port}`);
+  app.listen(process.env.WEB_PORT, ()=>{
+      console.log(`Running on http://localhost:${process.env.WEB_PORT}`);
   });
 })();

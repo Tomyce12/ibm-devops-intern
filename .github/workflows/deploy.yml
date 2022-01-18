@@ -17,7 +17,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
-          port: "22"
+          # port: "22"
           script: mkdir -p /home/ubuntu/www
 
       - name: Deploy to my EC2 instance

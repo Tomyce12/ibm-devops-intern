@@ -18,7 +18,8 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           port: ${{secrets.PORT}}
-          script: mkdir -p /home/ubuntu/www
+          # script: mkdir -p /home/ubuntu/www
+          script: whoami
 
       - name: Deploy to my EC2 instance
         uses: easingthemes/ssh-deploy@v2.1.5

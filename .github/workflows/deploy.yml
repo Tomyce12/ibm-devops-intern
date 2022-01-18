@@ -1,4 +1,4 @@
- name: Push-to-EC2
+name: Push-to-EC2
 
 on: push
 
@@ -11,31 +11,31 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v1
       
-      # - name: multiple command
-      #   uses: appleboy/ssh-action@master
-      #   with:
-      #     host: ${{ secrets.HOST }}
-      #     username: ${{ secrets.USERNAME }}
-      #     key: ${{ secrets.EC2_SSH_KEY }}
-      #     port: "22"
-      #     script: mkdir -p /home/ubuntu/www
+      - name: multiple command
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: "22"
+          script: mkdir -p /home/ubuntu/www
 
-      # - name: Deploy to my EC2 instance
-      #   uses: easingthemes/ssh-deploy@v2.1.5
-      #   env:
-      #     SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
-      #     SOURCE: "./"
-      #     REMOTE_HOST: ${{ secrets.HOST }}
-      #     REMOTE_USER: "ubuntu"
-      #     TARGET: "/home/ubuntu/www"
+      - name: Deploy to my EC2 instance
+        uses: easingthemes/ssh-deploy@v2.1.5
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+          SOURCE: "./"
+          REMOTE_HOST: ${{ secrets.HOST }}
+          REMOTE_USER: "ubuntu"
+          TARGET: "/home/ubuntu/www"
 
-      # - name: multiple command
-      #   uses: appleboy/ssh-action@master
-      #   with:
-      #     host: ${{ secrets.HOST }}
-      #     username: ${{ secrets.USERNAME }}
-      #     key: ${{ secrets.EC2_SSH_KEY }}
-      #     port: "22"
-      #     script: |
-      #       cd /home/ubuntu/www
-      #       node app.js
+      - name: multiple command
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: "22"
+          script: |
+            cd /home/ubuntu/www
+            node app.js

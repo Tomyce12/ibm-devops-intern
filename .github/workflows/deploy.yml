@@ -1,0 +1,41 @@
+name: Push-to-EC2
+
+on: push
+
+jobs:
+  deploy:
+    name: Push to EC2 Instance
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v1
+      
+      - name: Create deploy dir if not exist
+        uses: fifsky/ssh-action@master
+        with:
+          command: |
+            mkdir -p /home/ubuntu/www
+            ls -a
+          host: ${{ secrets.HOST }}
+          user: "ubuntu"
+          key: ${{ secrets.EC2_SSH_KEY}}
+
+      - name: Deploy to my EC2 instance
+        uses: easingthemes/ssh-deploy@v2.1.5
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+          SOURCE: "./"
+          REMOTE_HOST: ${{ secrets.HOST }}
+          REMOTE_USER: "ubuntu"
+          TARGET: "/home/ubuntu/www"
+
+      - name: Run 
+        uses: fifsky/ssh-action@master
+        with:
+          command: |
+            cd /home/ubuntu/www
+            node app.js
+          host: ${{ secrets.HOST }}
+          user: root
+          key: ${{ secrets.EC2_SSH_KEY}}

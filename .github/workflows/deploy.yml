@@ -29,13 +29,13 @@ jobs:
           REMOTE_USER: "ubuntu"
           TARGET: "/home/ubuntu/www"
 
-      - name: multiple command
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.EC2_SSH_KEY }}
-          port: "22"
-          script: |
-            cd /home/ubuntu/www
-            node app.js
+      # - name: multiple command
+      #   uses: appleboy/ssh-action@master
+      #   with:
+      #     host: ${{ secrets.HOST }}
+      #     username: ${{ secrets.USERNAME }}
+      #     key: ${{ secrets.EC2_SSH_KEY }}
+      #     port: "22"
+      #     script: |
+      #       cd /home/ubuntu/www
+      #       node app.js

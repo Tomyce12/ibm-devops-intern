@@ -1,0 +1,29 @@
+{
+  "name": "ibm-devops-intern",
+  "version": "1.0.0",
+  "description": "ibm devops intern",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tomyce12/ibm-devops-intern.git"
+  },
+  "keywords": [
+    "devops",
+    "ibm"
+  ],
+  "author": "Tomas Solovej",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tomyce12/ibm-devops-intern/issues"
+  },
+  "homepage": "https://github.com/Tomyce12/ibm-devops-intern#readme",
+  "dependencies": {
+    "express": "^4.17.2",
+    "express-session": "^1.17.2",
+    "express-visitor-counter": "^1.4.0",
+    "redis": "^4.0.2"
+  }
+}

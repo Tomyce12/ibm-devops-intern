@@ -8,10 +8,10 @@ const app = express();
 const port = 8080;
 
 const counters = {};
+const redisClient = redis.createClient({ database: 1 });
 
 (async () => {
     await redisClient.connect();
-    const redisClient = redis.createClient({ database: 1 });
 
   app.enable('trust proxy');
   app.use(expressSession({ secret: 'secret', resave: false, saveUninitialized: true }));

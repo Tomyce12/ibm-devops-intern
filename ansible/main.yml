@@ -1,0 +1,41 @@
+ ---
+- hosts: localhost
+  tasks:
+  - name: start an instance with a public IP address
+    amazon.aws.ec2_instance:
+      name: "public-compute-instance"
+      key_name: "prod-ssh-key"
+      vpc_subnet_id: subnet-86258ffe
+      instance_type: t2.micro
+      security_group: default
+      state: running
+      network:
+        assign_public_ip: true
+      image_id: ami-0892d3c7ee96c0bf7
+      tags:
+        Environment: Testing
+    register: returned_stuff
+
+  # - debug:
+  #     var: returned_stuff.instance_ids
+  
+  # - debug:
+  #     var: returned_stuff.instances[0].network_interfaces[0].association.public_ip
+  
+  - name: Update cache
+    remote_user: ubuntu
+    become: true
+    delegate_to: "{{ returned_stuff.instances[0].network_interfaces[0].association.public_ip }}"
+    apt: update_cache=yes   
+  
+  - name: Install redis
+    remote_user: ubuntu
+    become: true
+    delegate_to: "{{ returned_stuff.instances[0].network_interfaces[0].association.public_ip }}"
+    apt: name=redis-server state=latest
+  
+  - name: Restart Redis Server
+    remote_user: ubuntu
+    become: true
+    delegate_to: "{{ returned_stuff.instances[0].network_interfaces[0].association.public_ip }}"
+    service: name=redis state=restarted enabled=yes

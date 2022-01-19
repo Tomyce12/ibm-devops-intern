@@ -12,14 +12,24 @@ const redisClient = createClient({
 });
 
 (async () => {
-    await redisClient.connect();
+  await redisClient.connect();
 
   app.enable('trust proxy');
-  app.use(expressSession({ secret: 'secret', resave: false, saveUninitialized: true }));
-  app.use(expressVisitorCounter({ hook: counterId => counters[counterId] = (counters[counterId] || 0) + 1, redisClient }));
-  app.get('/', (req, res, next) => {
-    res.json(counters);
+
+  app.use(expressSession({ 
+    secret: 'secret',
+    resave: false,
+    saveUninitialized: true 
+  }));
+
+  app.use(expressVisitorCounter({
+    hook: counterId => counters[counterId] = (counters[counterId] || 0) + 1, redisClient 
+  }));
+
+  app.get('/', (req, res) => {
+    res.send(counters);
   });
+
   app.listen(process.env.WEB_PORT, ()=>{
       console.log(`Running on http://localhost:${process.env.WEB_PORT}`);
   });

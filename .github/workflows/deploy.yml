@@ -37,6 +37,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           port: ${{secrets.PORT}}
+          command_timeout: 200m
           script: |
             cd /home/ubuntu/www
             npm i

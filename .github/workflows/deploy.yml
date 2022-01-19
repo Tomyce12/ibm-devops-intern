@@ -40,4 +40,4 @@ jobs:
           script: |
             cd /home/ubuntu/www
             npm i
-            pm2 start node.js
+            node app.js

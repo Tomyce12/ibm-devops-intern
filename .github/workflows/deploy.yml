@@ -40,5 +40,5 @@ jobs:
           script: |
             cd /home/ubuntu/www
             npm i
-            node app.js
+            node start
 # sdasd

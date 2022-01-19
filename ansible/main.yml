@@ -46,10 +46,10 @@
     remote_user: ubuntu
     become: true
     delegate_to: "{{ returned_stuff.instances[0].network_interfaces[0].association.public_ip }}"
-    ansible.builtin.shell: curl -sL https://raw.githubusercontent.com/Unitech/pm2/master/packager/setup.deb.sh -o pm2_setup.sh
+    ansible.builtin.shell: curl -sL https://raw.githubusercontent.com/Unitech/pm2/master/packager/setup.deb.sh
 
   - name: "Install pm2"
     remote_user: ubuntu
     becode: true
     delegate_to: "{{ returned_stuff.instances[0].network_interfaces[0].association.public_ip }}"
-    ansible.builtin.shell: bash pm2_setup.sh
+    ansible.builtin.shell: sudo -E bash -

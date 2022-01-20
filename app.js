@@ -27,7 +27,7 @@ const redisClient = createClient({
   }));
 
   app.get('/', (req, res) => {
-    res.send(counters);
+    res.json(counters);
   });
 
   app.listen(process.env.WEB_PORT, ()=>{
